@@ -1,0 +1,50 @@
+<head>
+  <title>ChemE Compatibility</title>
+</head>
+
+<body>
+  <!--Jumbotron at top of page -->
+  <div class ="jumbotron center">
+    <div class ="container">
+      <h1>Welcome to ChemE Compatiblity!</h1>
+      <p>Find your match, Chemical Engineering style.</p>
+      <p>Start by logging into Facebook.</p>
+      {{> login}}
+    </div>
+  </div>
+  {{> search}}
+</body>
+
+<template name="search">
+  <div class="page-header clearfix">
+    <h4 class="pull-left">Friends</h4>
+    <div class="pull-right">
+      <input type="text" name="search" class="form-control" width="250px" placeholder="Find a Friend...">
+    </div>
+  </div>
+
+  <ul class="list-group">
+    {{#if searching}}
+      {{> loading}}
+    {{else}}
+      {{#each friends}}
+        <li class="list-group-item clearfix">
+          <span class="pull-left">{{name}}</span>
+          <span class="pull-right">{{id}}</span>
+        </li>
+      {{else}}
+        <p class="alert alert-warning">No friends named {{query}} found.</p>
+      {{/each}}
+    {{/if}}
+  </ul>
+</template>
+
+<template name="login">
+    {{#if currentUser}}
+        Now you're logged in as <strong>{{currentUser.username}}</strong> using {{getEmail}}
+
+        <br> <br> <button class="log-out">Log out</button>
+    {{else}}
+        <button class="login-facebook">Facebook Login</button>
+    {{/if}}
+</template>
